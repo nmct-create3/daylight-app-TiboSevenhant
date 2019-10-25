@@ -31,25 +31,20 @@ let placeSunAndStartMoving = (sunriseTimestamp, sunsetTimestamp) => {
 	// Anders kunnen we huidige waarden evalueren en de zon updaten via de updateSun functie.
 	// PS.: vergeet weer niet om het resterend aantal minuten te updaten en verhoog het aantal verstreken minuten.
 	// console.log(totalMinutes, sunrise);
-
 	let now = new Date();
 	//now.setMinutes(now.getMinutes() + 1);
 	let sunset = new Date(sunsetTimestamp * 1000);
 	let sunrise = new Date(sunriseTimestamp * 1000);
-
 	let verschil = new Date(sunset.getTime() - now.getTime());
 	let verschilMin = Math.round(verschil / 60000);
-
 	let totaalTime = new Date(sunset.getTime() - sunrise.getTime());
 	let totaalMinutes = Math.round(totaalTime / 60000);
 	let percentagePassed = 100 - (verschilMin / totaalMinutes) * 100;
 	let y = -0.04 * Math.pow(percentagePassed, 2) + 4 * percentagePassed - 2e-13;
 	let x = percentagePassed;
 	console.log(totaalMinutes, verschilMin, percentagePassed, y);
-
 	let sun = document.querySelector('.js-sun');
 	sun.setAttribute('data-time', _parseMillisecondsIntoReadableTime(now / 1000));
-
 	sun.style.bottom = `${y}%`;
 	sun.style.left = `${x}%`;
 
@@ -67,6 +62,7 @@ let placeSunAndStartMoving = (sunriseTimestamp, sunsetTimestamp) => {
 		document.querySelector('.js-time-left').innerHTML = diffMinutes;
 	}
 
+	
 	updateSun();
 };
 
